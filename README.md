@@ -104,7 +104,7 @@ HiroAI follows a three-tier architecture:
 ```
 
 Package structure (top-level):
-- in.hiresense
+- hiroaiapp
   - controllers/         # Servlet controllers
   - services/            # Business services
   - dao/                 # Data access objects
@@ -168,7 +168,7 @@ mail.smtp.host=smtp.gmail.com
 mail.smtp.port=587  
 mail.smtp.auth=true  
 mail.smtp.starttls.enable=true  
-mail.username=your-email@gmail.com  
+mail.username=your-email
 mail.password=your-app-password
 
 # Affinda API Configuration
@@ -184,9 +184,9 @@ Edit `src/main/webapp/WEB-INF/web.xml` to change app context parameters if neede
 
 ## 🗄 Database Setup
 
-1. Create a new MySQL database (suggested name: `hiresense_db`).  
+1. Create a new MySQL database.  
 2. Execute the project's SQL schema (see `hiresense_db.sql`) to create tables and initial structure.  
-3. Update DB connection settings in your DB utility (e.g. `DBConnection` in `dbutils`) or in `config.properties`.
+3. Update DB connection settings in your DB utility (e.g. `DBConnection` in `dbutils`).
 
 > Note: This README contains the ER model (Mermaid) for the schema. No additional SQL commands are included here.
 
