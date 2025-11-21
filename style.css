@@ -1,0 +1,173 @@
+@import
+	url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap')
+	;
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap')
+	;
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap')
+	;
+
+html, body {
+	height: 100%;
+	margin: 0;
+	background: #334443;
+	color: #faeab1;
+	font-family: 'Rubik';
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	background: #334443;
+}
+
+nav {
+	background-color: #fff8dd;
+	position:sticky;
+}
+
+a {
+	color: #000 !important;
+}
+
+footer {
+	margin-top: auto;
+	position: sticky;
+	background-color: #fff8dd;
+}
+
+/* Index page styling */
+.hero {
+	text-align: center;
+	margin-top: 80px;
+}
+
+.hero h1 {
+	font-size: 4rem;
+	font-weight: bold;
+}
+
+.hero p {
+	font-size: 1.25rem;
+	margin-top: 15px;
+}
+
+.code-typing {
+  font-family: "Jura";
+}
+
+.typewriter h1 {
+  overflow: hidden; 
+  border-right: 0.15em solid white;
+  white-space: nowrap;
+  margin: 0 auto; 
+  letter-spacing: 0.12em;
+  width: 0ch;
+  animation: typing 6s steps(25) 1s infinite, blink-caret 1s step-end infinite;
+}
+
+@keyframes typing {
+  0% { width: 0ch; }
+  40% { width: 25ch; }   
+  55% { width: 25ch; }   
+  95% { width: 0ch; }    
+  100% { width: 0ch; }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: white;
+  }
+}
+
+.btn-cta {
+	background-color: #fff;
+	color: #4e54c8;
+	font-weight: bold;
+	padding: 12px 30px;
+	border-radius: 30px;
+	font-family: 'Lora';
+}
+
+.btn-cta:hover {
+	color: #2c2c84;
+	background-color: #e2e2ff;
+}
+
+.feature-card {
+	background: rgba(255, 255, 255, 0.1);
+	padding: 25px;
+	border-radius: 15px;
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+	transition: transform 0.3s ease;
+	animation: fadeInUp 1s ease-in-out;
+}
+
+.feature-card:hover {
+	transform: translateY(-10px);
+}
+
+/* Login page styling */
+.login-container {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	animation: fadeIn 1s ease-in;
+}
+
+.login-card {
+	background: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 20px;
+	padding: 30px;
+	width: 100%;
+	max-width: 400px;
+}
+
+.form-control {
+	background-color: rgba(255, 255, 255, 0.2);
+	border: none;
+	color: white;
+}
+
+.form-control::placeholder {
+	color: whitesmoke;
+}
+
+.btn-login {
+	background-color: #fff;
+	color: #4e54c8;
+	font-weight: bold;
+	font-family: 'Lora';
+	border-radius: 30px;
+	width: 100%;
+}
+
+.btn-login:hover {
+	color: #2c2c84;
+	background-color: #e2e2ff;
+}
+
+/* Job listing page styling */
+.job-form-card {
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 15px;
+	padding: 25px;
+	backdrop-filter: blur(50px);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+option {
+	background-color: #faeab1;
+	color: #334443;
+}
