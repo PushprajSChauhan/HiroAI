@@ -32,24 +32,58 @@
 	color: #faf8f1;
 }
 
-@keyframes glowShift {
-    0% {
-        box-shadow: 0 0 20px rgba(250, 234, 177, 0.7);
-        border-color: #faeab1;
-    }
-    50% {
-        box-shadow: 0 0 20px rgba(226, 226, 255, 0.7);
-        border-color: #4e54c8;
-    }
-    100% {
-        box-shadow: 0 0 20px rgba(250, 234, 177, 0.7);
-        border-color: #faeab1;
-    }
+@
+keyframes glowShift { 0% {
+	box-shadow: 0 0 20px rgba(250, 234, 177, 0.7);
+	border-color: #faeab1;
 }
 
+50
+%
+{
+box-shadow
+:
+0
+0
+20px
+rgba(
+226
+,
+226
+,
+255
+,
+0.7
+);
+border-color
+:
+#4e54c8;
+}
+100
+%
+{
+box-shadow
+:
+0
+0
+20px
+rgba(
+250
+,
+234
+,
+177
+,
+0.7
+);
+border-color
+:
+#faeab1;
+}
+}
 .applicant-card:hover {
-    animation: glowShift 1.8s infinite ease-in-out;
-    transform: translateY(-6px);
+	transform: translateY(-5px);
+	box-shadow: 0 0 15px #246BFD;
 }
 
 .match-badge {
@@ -73,6 +107,7 @@
 	backdrop-filter: blur(10px);
 	border: 1px solid rgba(255, 255, 255, 0.3);
 	border-radius: 20px;
+	box-shadow: 0 0 10px #00e8f0;
 }
 
 .is-animated {
@@ -87,47 +122,48 @@
 }
 
 .property {
-    text-align: left;
-    border-right: 2px solid #fff;
-    border-bottom: 2px solid #fff;
-    width: 0;
-    margin-bottom: 3rem;
-    overflow: hidden;
-    display: inline-block;
-    white-space: nowrap;
-
-    /* STANDARD ANIMATION */
-    animation-name: expandProperty;
-    animation-delay: 0.5s;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-in-out;
-
-    /* Vendor prefix (optional, fallback) */
-    -webkit-animation-name: expandProperty;
-    -webkit-animation-delay: 0.5s;
-    -webkit-animation-duration: 1s;
-    -webkit-animation-fill-mode: forwards;
-    -webkit-animation-timing-function: ease-in-out;
+	text-align: left;
+	border-right: 2px solid #fff;
+	border-bottom: 2px solid #fff;
+	width: 0;
+	margin-bottom: 3rem;
+	overflow: hidden;
+	display: inline-block;
+	white-space: nowrap;
+	/* STANDARD ANIMATION */
+	animation-name: expandProperty;
+	animation-delay: 0.5s;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+	animation-timing-function: ease-in-out;
+	/* Vendor prefix (optional, fallback) */
+	-webkit-animation-name: expandProperty;
+	-webkit-animation-delay: 0.5s;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-fill-mode: forwards;
+	-webkit-animation-timing-function: ease-in-out;
 }
 
 /* STANDARD KEYFRAMES */
-@keyframes expandProperty {
-    from { width: 0px; }
-    to   { width: 470px; }
+@keyframes expandProperty {from { width:0px;
+	
+}
+
+to {
+	width: 470px;
+}
+
 }
 
 /* WebKit fallback */
-@-webkit-keyframes expandProperty {
-    from { width: 0px; }
-    to   { width: 420px; }
+@-webkit-keyframes expandProperty {from { width:0px;
+	
 }
 
-
-nav {
-	background-color: #fff8dd;
+to {
+	width: 420px;
 }
-
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -145,12 +181,10 @@ nav {
 
 	<main class="container py-5 mb-5">
 		<div class="property is-animated">
-			<h1 class="welcome-title code-typing">
-				🔍 View Applicants
-			</h1>
+			<h1 class="welcome-title code-typing">🔍 View Applicants</h1>
 		</div>
 
-		<div class="p-4 mb-4 mycard shadow rounded-4">
+		<div class="p-4 mb-4 mycard rounded-4">
 			<h3><%=job.getTitle()%>
 				@
 				<%=job.getCompany()%></h3>
@@ -166,7 +200,7 @@ nav {
 			</p>
 		</div>
 
-		<div class="mycard p-4 mb-4 shadow rounded-4">
+		<div class="mycard p-4 mb-4 rounded-4">
 			<h4 class="filter-title mb-3">
 				<i class="fas fa-filter me-2"></i>Filter Applicants
 			</h4>
@@ -205,7 +239,7 @@ nav {
 			%>
 
 			<div class="col-md-6 col-lg-4">
-				<div class="applicant-card shadow">
+				<div class="applicant-card">
 					<h6 class="fw-bold">
 						👤 User ID:
 						<%=obj.getUserId()%></h6>
@@ -224,7 +258,8 @@ nav {
 						%>
 						<a
 							href="DownloadResumeServlet?path=<%=URLEncoder.encode(obj.getResumePath(), "UTF-8")%>"
-							target="_blank" class="btn btn-primary text-light btn-sm small-btn">Download</a>
+							target="_blank"
+							class="btn btn-primary text-light btn-sm small-btn">Download</a>
 						<%
 						} else {
 						%>
@@ -238,7 +273,6 @@ nav {
 						<input type="hidden" name="appId" value="<%=obj.getId()%>" /> <input
 							type="hidden" name="jobId" value="<%=obj.getJobId()%>" />
 						<%
-						
 						if (obj.getStatus().equals("applied")) {
 						%>
 						<button type="submit" name="status" value="shortlisted"
@@ -278,8 +312,10 @@ nav {
 			} else {
 			%>
 			<div class="col-12 mb-5">
-				<h4 class="alert alert-warning text-center">No applicants
-					found for this status.</h4>
+				<h4 class="text-center text-warning">
+					<i class="fas fa-exclamation-triangle me-2"></i>No Applications
+					found for this status
+				</h4>
 			</div>
 			<%
 			}
