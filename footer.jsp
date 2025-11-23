@@ -1,3 +1,3 @@
-<footer class="bg-dark text-white text-center p-3">
-	<p>&copy; 2025 <%=application.getAttribute("appName")%> | Empowering smarter careers with AI</p>
+<footer class="text-center">
+	<p>&copy; <%=java.time.LocalDate.now().getYear() %> <%=application.getAttribute("appName")%> | Empowering smarter careers with AI | Crafted by <a href="https://drive.google.com/file/d/1qlBbxlnNK5RoyG2KRW5U0THuDblkIPrM/view?usp=sharing" target="_blank">Pushpraj Singh Chauhan</a></p>
 </footer>
