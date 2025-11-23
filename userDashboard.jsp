@@ -21,6 +21,34 @@
 	rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
+/* Prevent body padding changes when modal opens */
+body.modal-open {
+	padding-right: 0 !important;
+	overflow-y: scroll !important;
+}
+
+/* Ensure footer stays at bottom */
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+main {
+	flex: 1 0 auto;
+}
+
+footer {
+	flex-shrink: 0;
+	margin-top: auto;
+}
+
 .custom {
 	background-color: #fff;
 	font-family: "Lora";
@@ -45,6 +73,7 @@
 
 .mycard:hover {
 	transform: translateY(-10px);
+	box-shadow:0 0 15px #246BFD;
 }
 
 .is-animated {
@@ -95,10 +124,148 @@ div.is-animated h1 {
     to   { width: 420px; }
 }
 
-nav {
-	background-color: #fff8dd;
+/* ----------- FULL PAGE OVERLAY ----------- */
+.otp-loader-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.65);
+	backdrop-filter: blur(6px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 99999;
 }
 
+.d-none {
+	display: none !important;
+}
+
+/* ----------- LOADER WRAPPER ----------- */
+.loader-wrapper {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 200px;
+	height: 200px;
+	font-size: 1.3em;
+	font-weight: 300;
+	color: white;
+}
+
+/* ----------- CIRCULAR COLORFUL LOADER ----------- */
+.loader {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	aspect-ratio: 1 / 1;
+	border-radius: 50%;
+	background-color: transparent;
+	animation: loader-rotate 2.1s linear infinite;
+	z-index: 0;
+}
+
+@keyframes loader-rotate {
+	0% {
+		transform: rotate(90deg);
+		box-shadow: 0 10px 20px 0 #fff inset, 0 20px 30px 0 #ad5fff inset,
+			0 60px 60px 0 #471eec inset;
+	}
+	50% {
+		transform: rotate(270deg);
+		box-shadow: 0 10px 20px 0 #fff inset, 0 20px 10px 0 #d60a47 inset,
+			0 40px 60px 0 #311e80 inset;
+	}
+	100% {
+		transform: rotate(450deg);
+		box-shadow: 0 10px 20px 0 #fff inset, 0 20px 30px 0 #ad5fff inset,
+			0 60px 60px 0 #471eec inset;
+	}
+}
+
+/* ----------- Animated Letters ----------- */
+.loader-letter {
+	display: inline-block;
+	opacity: 0.4;
+	animation: loader-letter-anim 2.1s infinite;
+	z-index: 1;
+}
+
+.loader-letter:nth-child(1) {
+	animation-delay: 0s;
+}
+.loader-letter:nth-child(2) {
+	animation-delay: 0.1s;
+}
+.loader-letter:nth-child(3) {
+	animation-delay: 0.2s;
+}
+.loader-letter:nth-child(4) {
+	animation-delay: 0.3s;
+}
+.loader-letter:nth-child(5) {
+	animation-delay: 0.4s;
+}
+.loader-letter:nth-child(6) {
+	animation-delay: 0.5s;
+}
+.loader-letter:nth-child(7) {
+	animation-delay: 0.6s;
+}
+.loader-letter:nth-child(8) {
+	animation-delay: 0.7s;
+}
+.loader-letter:nth-child(9) {
+	animation-delay: 0.8s;
+}
+.loader-letter:nth-child(10) {
+	animation-delay: 0.9s;
+}
+.loader-letter:nth-child(11) {
+	animation-delay: 1s;
+}
+.loader-letter:nth-child(12) {
+	animation-delay: 1.1s;
+}
+
+@keyframes loader-letter-anim {
+	0%,
+	100% {
+		opacity: 0.4;
+		transform: translateY(0);
+	}
+	20% {
+		opacity: 1;
+		transform: scale(1.15);
+	}
+	40% {
+		opacity: 0.7;
+		transform: translateY(0);
+	}
+}
+
+.loader-line {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	z-index: 1;
+}
+
+.custom-select {
+	background-color: rgba(255,255,255,0.2);
+	color: #fff !important;
+	border: none;
+	appearance: none !important; /* Remove default dropdown arrow */
+	-webkit-appearance: none !important;
+	-moz-appearance: none !important;
+	background-image: none !important; /* Remove Bootstrap's arrow */
+	padding-right: 1rem !important; /* Adjust padding since no arrow */
+}
 </style>
 </head>
 <body>
@@ -131,7 +298,7 @@ nav {
 				</div>
 
 				<div class="col-md-2">
-					<select name="experience" class="form-select">
+					<select name="experience" class="form-select custom-select">
 						<option value="" selected disabled>Experience</option>
 						<option value="Fresher"
 							${param.experience == 'Fresher' ? 'selected':''}>Fresher</option>
@@ -154,7 +321,7 @@ nav {
 				</div>
 
 				<div class="col-md-2">
-					<select name="packageLpa" class="form-select">
+					<select name="packageLpa" class="form-select custom-select">
 						<option value="" selected disabled>Package (LPA)</option>
 						<option value="1-3 Lacs P.A."
 							${param.packageLpa == '1-3 Lacs P.A.' ? 'selected':''}>1-3
@@ -176,15 +343,15 @@ nav {
 				</div>
 
 				<div class="col-md-2">
-					<select name="sort" class="form-select">
-						<option value="" selected disabled>Sort</option>
+					<select name="sort" class="form-select custom-select">
+						<option value="" selected disabled>Sort by Date Posted</option>
 						<option value="asc" ${param.sort == 'asc' ? 'selected':''}>Fewest</option>
 						<option value="desc" ${param.sort == 'desc' ? 'selected':''}>Most</option>
 					</select>
 				</div>
 
-				<div class="col-md-1">
-					<button type="submit" class="btn custom">Go</button>
+				<div class="col-md-1" style="margin-top: 13px;">
+					<button type="submit" class="lr-custom-btn"><span>Search</span></button>
 				</div>
 			</div>
 		</form>
@@ -202,7 +369,7 @@ nav {
 			for (JobPojo job : jobs) {
 			%>
 			<div class="col-md-3 col-lg-3">
-				<div class="card p-2 position-relative shadow mycard">
+				<div class="card p-2 position-relative mycard">
 					<span class="position-absolute top-0 end-0 px-2 py-1 small">
 						<%=job.getCreatedAt() != null ? new SimpleDateFormat("d MMM").format(job.getCreatedAt()) : ""%>
 					</span>
@@ -241,11 +408,11 @@ nav {
 						<button type="button"
 							class="btn btn-outline-warning btn-sm mt-2 small"
 							onclick="openResumePopup(<%=job.getId()%>, <%=job.getScore()%>, '<%=job.getSkills().replace("'", "\\'")%>')">
-							Apply Now</button>
+							☑️ Apply Now</button>
 						<button type="button"
 							class="btn btn-outline-info btn-sm mt-2 small"
 							onclick='showDetails(<%=job.getId()%>,"<%=job.getTitle().replace("\"", "&quot;")%>", " <%=job.getCompany().replace("\"", "&quot;")%>", "<%=job.getLocation().replace("\"", "&quot;")%>", "<%=job.getExperience().replace("\"", "&quot;")%>", "<%=job.getPackageLpa().replace("\"", "&quot;")%>", "<%=job.getVacancies()%>", "<%=job.getSkills().replace("\"", "&quot;")%>", "<%=job.getDescription().replace("\"", "&quot;")%>", "<%=new java.text.SimpleDateFormat("dd MMM yyyy").format(job.getCreatedAt())%>")'>
-							View Details</button>
+							🔍 View Details</button>
 						<%
 						}
 						%>
@@ -322,7 +489,7 @@ nav {
 			aria-labelledby="resumeModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg modal-dialog-centered">
 				<form id="resumeForm" method="post" enctype="multipart/form-data"
-					action="UploadResumeServlet"
+					action="UploadResumeServlet" onsubmit="showApplicationLoader()"
 					class="modal-content bg-dark text-white">
 					<div class="modal-header">
 						<h5 class="modal-title" id="resumeModalLabel">📄 Upload
@@ -349,15 +516,74 @@ nav {
 
 	</main>
 
+	<!-- ---------- FULL PAGE LOADER OVERLAY ---------- -->
+	<div id="fullPageLoader" class="otp-loader-overlay d-none">
+		<div class="loader-wrapper">
+			<div class="loader-line">
+				<span class="loader-letter">A</span>
+				<span class="loader-letter">p</span>
+				<span class="loader-letter">p</span>
+				<span class="loader-letter">l</span>
+				<span class="loader-letter">y</span>
+				<span class="loader-letter">i</span>
+				<span class="loader-letter">n</span>
+				<span class="loader-letter">g</span>
+				<span class="loader-letter">.</span>
+				<span class="loader-letter">.</span>
+				<span class="loader-letter">.</span>
+			</div>
+
+			<div class="loader"></div>
+		</div>
+	</div>
+
+	<!-- Sweet Alert for successful application -->
+	<%
+	String success = request.getParameter("success");
+	if ("applied".equals(success)) {
+	%>
+	<script>
+		Swal.fire({
+			title : "Applied Successfully ✅",
+			text : "Your application has been submitted",
+			timer : 2000,
+			icon : "success",
+			showConfirmButton : false
+		});
+	</script>
+	<%
+	}
+	%>
+
+	<!-- Sweet Alert for failed application -->
+	<%
+	String error = request.getParameter("error");
+	if ("1".equals(error)) {
+	%>
+	<script>
+		Swal.fire({
+			title : "Application Failed!",
+			text : "Something went wrong. Please try again",
+			timer : 2000,
+			icon : "error",
+			confirmButtonText : "Okay"
+		});
+	</script>
+	<%
+	}
+	%>
+
 	<%@include file="includes/footer.jsp"%>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
 		crossorigin="anonymous"></script>
 	<script>
-<%if (request.getParameter("applied") != null) {%>
-    Swal.fire({icon:'success',title:'Applied Successfully',showConfirmButton:false,timer:1500})
-<%}%>
+
+function showApplicationLoader() {
+	document.getElementById("fullPageLoader").classList.remove("d-none");
+}
+
 let lastFocusedElement = null;
 function openResumePopup(jobId, score, skills) {
     const resumeUploaded =<%=request.getAttribute("resumeUploaded")%>;
@@ -376,6 +602,7 @@ function openResumePopup(jobId, score, skills) {
                         cancelButtonText: "Upload new"
                     }).then((result)=>{
                        if(result.isConfirmed){
+                           showApplicationLoader();
                            const form = document.createElement("form");
                            form.method = "POST";
                            form.action = "ApplyJobServlet";
