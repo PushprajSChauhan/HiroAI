@@ -23,6 +23,7 @@
 	backdrop-filter: blur(10px);
 	border: 1px solid rgba(255, 255, 255, 0.3);
 	border-radius: 20px;
+	box-shadow: 0 0 5px #00e8f0;
 }
 
 .is-animated {
@@ -60,19 +61,25 @@ div.is-animated h1 {
 }
 
 /* STANDARD KEYFRAMES */
-@keyframes expandProperty {
-    from { width: 0px; }
-    to   { width: var(--dynamic-width); }
+@keyframes expandProperty {from { width:0px;
+	
+}
+
+to {
+	width: var(--dynamic-width);
+}
+
 }
 
 /* WebKit fallback */
-@-webkit-keyframes expandProperty {
-    from { width: 0px; }
-    to   { width: 420px; }
+@-webkit-keyframes expandProperty {from { width:0px;
+	
 }
 
-nav {
-	background-color: #fff8dd;
+to {
+	width: 420px;
+}
+
 }
 </style>
 </head>
@@ -95,76 +102,85 @@ nav {
 		</div>
 
 
-		<div class="p-4 mb-5 job-form-card mycard shadow">
+		<div class="p-4 mb-5 job-form-card mycard">
 			<h4 class="mb-3">Post a New Job</h4>
 			<form action="PostJobServlet" method="post">
-				<div class="mb-3">
-					<input type="text" class="form-control" placeholder="Job Title"
-						name="title" required />
+				<!-- Row 1: Job Title and Company Name side by side -->
+				<div class="row mb-3">
+					<div class="col-md-6">
+						<input type="text" class="form-control" placeholder="Job Title"
+							name="title" required />
+					</div>
+					<div class="col-md-6">
+						<input type="text" name="company" class="form-control"
+							placeholder="Company Name" required />
+					</div>
 				</div>
 
+				<!-- Row 2: Job Description (full width) -->
 				<div class="mb-3">
 					<textarea name="description" class="form-control"
 						placeholder="Job Description" required></textarea>
 				</div>
 
-				<div class="mb-3">
-					<input type="text" name="skills" class="form-control"
-						placeholder="Required Skills (Comma Separated)" required />
+				<!-- Row 3: Required Skills and Vacancies side by side -->
+				<div class="row mb-3">
+					<div class="col-md-6">
+						<input type="text" name="skills" class="form-control"
+							placeholder="Required Skills (Comma Separated)" required />
+					</div>
+					<div class="col-md-6">
+						<input type="number" name="vacancies" class="form-control"
+							placeholder="Number of Vacancies" required />
+					</div>
 				</div>
 
-				<div class="mb-3">
-					<input type="text" name="company" class="form-control"
-						placeholder="Company Name" required />
+				<!-- Row 4: Location, Experience, Package in one row (styled dropdowns) -->
+				<div class="row mb-5">
+					<div class="col-md-4">
+						<select name="location" class="form-select">
+							<option value="" disabled selected>Select location</option>
+							<option value="Bangalore">Bangalore</option>
+							<option value="Mumbai">Mumbai</option>
+							<option value="Pune">Pune</option>
+							<option value="Noida">Noida</option>
+							<option value="Delhi">Delhi</option>
+							<option value="Hyderabad">Hyderabad</option>
+						</select>
+					</div>
+					<div class="col-md-4">
+						<select name="experience" class="form-select">
+							<option value="" disabled selected>Select Experience</option>
+							<option value="Fresher">Fresher</option>
+							<option value="0-1 years">0-1 Years</option>
+							<option value="1-2 years">1-2 Years</option>
+							<option value="2-3 years">2-3 Years</option>
+							<option value="3-5 years">3-5 Years</option>
+							<option value="5+ years">5+ Years</option>
+						</select>
+					</div>
+					<div class="col-md-4">
+						<select name="packageLpa" class="form-select">
+							<option value="" disabled selected>Package(LPA)</option>
+							<option value="1-3 Lacs P.A.">1-3 LPA</option>
+							<option value="3-5 Lacs P.A.">3-5 LPA</option>
+							<option value="5-7 Lacs P.A.">5-7 LPA</option>
+							<option value="7-10 Lacs P.A.">7-10 LPA</option>
+							<option value="10+ Lacs P.A.">10+ LPA</option>
+						</select>
+					</div>
 				</div>
 
-				<div class="mb-3">
-					<select name="location" class="form-select">
-						<option value="" disabled selected>Select location</option>
-						<option value="Bangalore">Bangalore</option>
-						<option value="Mumbai">Mumbai</option>
-						<option value="Pune">Pune</option>
-						<option value="Noida">Noida</option>
-						<option value="Delhi">Delhi</option>
-						<option value="Hyderabad">Hyderabad</option>
-					</select>
-				</div>
-
-				<div class="mb-3">
-					<select name="experience" class="form-select" id="">
-						<option value="" disabled selected>Select Experience</option>
-						<option value="Fresher">Fresher</option>
-						<option value="0-1 years">0-1 Years</option>
-						<option value="1-2 years">1-2 Years</option>
-						<option value="2-3 years">2-3 Years</option>
-						<option value="3-5 years">3-5 Years</option>
-						<option value="5+ years">5+ Years</option>
-					</select>
-				</div>
-
-				<div class="mb-3">
-					<select name="packageLpa" class="form-select">
-						<option value="" disabled selected>Package(LPA)</option>
-						<option value="1-3 Lacs P.A.">1-3 LPA</option>
-						<option value="3-5 Lacs P.A.">3-5 LPA</option>
-						<option value="5-7 Lacs P.A.">5-7 LPA</option>
-						<option value="7-10 Lacs P.A.">7-10 LPA</option>
-						<option value="10+ Lacs P.A.">10+ LPA</option>
-					</select>
-				</div>
-
-				<div class="mb-5">
-					<input type="number" name="vacancies" class="form-control"
-						placeholder="Number of Vacancies" required />
-				</div>
-
-				<button type="submit" class="btn btn-login w-50 mx-auto d-block">Post
-					Job</button>
+				<button type="submit" class="custom-btn mx-auto">
+					<span>Post Job</span>
+				</button>
 			</form>
 		</div>
 
+
 		<!-- search and filter jobs section starts -->
-		<form action="EmployerDashboardServlet" method="post" class="mb-4">
+		<form action="EmployerDashboardServlet" method="post" class="mb-4"
+			style="margin-left: 2rem;">
 			<div class="row g-4">
 				<div class="col-md-4">
 					<input type="text" name="search" class="form-control"
@@ -173,7 +189,7 @@ nav {
 				</div>
 
 				<div class="col-md-3">
-					<select name="status" class="form-select">
+					<select name="status" class="form-select custom-select">
 						<option value="" selected disabled>Filter by Status</option>
 						<option value="active" ${param.status=='active' ? 'selected' : ''}>Active</option>
 						<option value="inactive"
@@ -182,7 +198,7 @@ nav {
 				</div>
 
 				<div class="col-md-3">
-					<select name="sort" class="form-select">
+					<select name="sort" class="form-select custom-select">
 						<option value="" selected disabled>Sort by Number of
 							Applicants</option>
 						<option value="asc" ${param.sort=='asc' ? 'selected' : ''}>Least
@@ -192,51 +208,24 @@ nav {
 					</select>
 				</div>
 
-				<div class="col-md-2">
-					<button type="submit" class="btn btn-login">Search</button>
+				<div class="col-md-2" style="margin-top: 22px;">
+					<button type="submit" class="lr-custom-btn">
+						<span>Search</span>
+					</button>
 				</div>
 			</div>
 		</form>
 		<!-- search and filter jobs section ends -->
-
-		<!-- jobs posted starts 
-		<div class="card p-4 mb-5">
-			<h5 class="jobs-posted">Jobs You've Posted</h5>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Job Title</th>
-						<th>Applicants</th>
-						<th>Status</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Software Developer</td>
-						<td>5</td>
-						<td>Status</td>
-						<td><a href="#" class="btn btn-primary">View</a> <a href="#"
-							class="btn btn-warning">Deactivate/Activate</a></td>
-					</tr>
-					<tr>
-						<td colspan="4" class="text-center text-warning">No jobs
-							posted yet.</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-jobs posted ends -->
 		<!-- now we have to fetch all Jobs posted by the employer and show them in a table -->
 		<%
 		java.util.List<hiroaiapp.pojo.JobPojo> jobList = (java.util.List<hiroaiapp.pojo.JobPojo>) request
 				.getAttribute("jobList");
 		%>
-		<div class="card shadow p-4 mb-5 mycard">
-			<h4 class="mb-2">
+		<div class="card p-4 mb-5 mycard">
+			<h4 class="mb-3">
 				Jobs Posted by
 				<%=jobList.get(0).getCompany()%></h4>
-			<table class="table text-light">
+			<table class="table text-light text-center">
 				<thead>
 					<tr>
 						<th>Job Title</th>
@@ -256,9 +245,9 @@ jobs posted ends -->
 						<td><%=job.getStatus().toUpperCase()%></td>
 						<td class="gap-3"><a
 							href="ViewApplicantsServlet?jobId=<%=job.getId()%>"
-							class="btn btn-sm text-light btn-outline-info">View</a> <a
+							class="btn btn-sm text-light btn-outline-info">👀 View</a> <a
 							href="ToggleJobStatusServlet?jobId=<%=job.getId()%>"
-							class="btn btn-sm <%="active".equals(job.getStatus()) ? "btn-outline-danger text-light" : "btn-outline-warning"%>"><%="active".equals(job.getStatus()) ? "Deactivate" : "Activate"%></a>
+							class="btn btn-sm <%="active".equals(job.getStatus()) ? "btn-outline-danger text-light" : "btn-outline-warning text-light"%>"><%="active".equals(job.getStatus()) ? "🔽 Deactivate" : "🔼 Activate"%></a>
 						</td>
 					</tr>
 					<%
@@ -303,6 +292,32 @@ jobs posted ends -->
 			timer : 2000,
 			icon : "error",
 			confirmButtonText : "Okay"
+		});
+	</script>
+	<%
+	}
+	String toggleStatus = request.getParameter("toggle");
+	if ("activated".equals(toggleStatus)) {
+	%>
+	<script>
+		Swal.fire({
+			title : "Job Activated ✅",
+			text : "The job posting is now active",
+			timer : 2000,
+			icon : "success",
+			showConfirmButton : false
+		});
+	</script>
+	<%
+	} else if ("deactivated".equals(toggleStatus)) {
+	%>
+	<script>
+		Swal.fire({
+			title : "Job Deactivated ⏸️",
+			text : "The job posting is now inactive",
+			timer : 2000,
+			icon : "info",
+			showConfirmButton : false
 		});
 	</script>
 	<%
