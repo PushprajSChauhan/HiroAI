@@ -22,7 +22,7 @@ import org.json.JSONObject;
 public class AffindaAPI {
 //	this class has 2 major tasks: analyze the resume file using Affinda and transfer the data after extracting it from the API response for displaying on the frontend 
 
-	private static final String API_KEY = "aff_a467147744184da3fdcc792c54dc8b18fe95cd0f";
+	private static final String API_KEY = "<Affinda_API_KEY>";
 
 	public static String analyzeResume(File resumeFile) throws IOException {
 		String boundary = "----WebKitFormBoundary" + UUID.randomUUID(); // it is the boundary value required by the
@@ -182,7 +182,6 @@ public class AffindaAPI {
 		
 		return experience.split("\\n|\\. ");
 	}
-
 	
 	public static int calculateMatchScore(String jobSkillsCsv, List<String> resumeSkills){
         if(resumeSkills == null || resumeSkills.isEmpty()) return 0;
