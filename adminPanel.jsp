@@ -22,6 +22,7 @@
 	backdrop-filter: blur(10px);
 	border: 1px solid rgba(255, 255, 255, 0.3);
 	border-radius: 20px;
+	box-shadow: 0 0 10px #00e8f0;
 }
 
 .is-animated {
@@ -59,20 +60,18 @@
 }
 
 /* STANDARD KEYFRAMES */
-@
-keyframes expandProperty {from { width:0px;
+@keyframes expandProperty {from { width:0px;
 	
 }
 
 to {
-	width: 550px;
+	width: 530px;
 }
 
 }
 
 /* WebKit fallback */
-@
--webkit-keyframes expandProperty {from { width:0px;
+@-webkit-keyframes expandProperty {from { width:0px;
 	
 }
 
@@ -91,7 +90,7 @@ to {
 		return;
 	}
 	%>
-	<div class="container py-3">
+	<div class="container py-3 mt-3">
 		<div class="property is-animated">
 			<h1 class="code-typing">👑 Admin Dashboard</h1>
 		</div>
@@ -123,8 +122,8 @@ to {
 						</select>
 					</div>
 
-					<div class="col-md-2">
-						<button type="submit" class="btn btn-login">Apply filters</button>
+					<div class="col-md-2" style="margin-top: 5px">
+						<button type="submit" class="lr-custom-btn"><span style="padding: 12px 65px">Search</span></button>
 					</div>
 				</div>
 			</form>
@@ -132,7 +131,7 @@ to {
 		<!-- filter section ends -->
 
 		<!-- user table starts -->
-		<div class="card p-4 mb-5 shadow mycard">
+		<div class="card p-4 mb-5 mycard">
 			<h4 class="mb-3">👥 Users</h4>
 			<table class="table text-light">
 				<thead>
@@ -160,11 +159,11 @@ to {
 							if ("active".equals(users.get(i).getStatus())) {
 							%> <a
 							href="UpdateUserStatusServlet?userId=<%=users.get(i).getId()%>&action=block&role=<%=users.get(i).getRole()%>"
-							class="btn btn-outline-danger text-white">Block</a> <%
+							class="btn btn-outline-danger text-white">🚫 Block</a> <%
  } else {
  %> <a
 							href="UpdateUserStatusServlet?userId=<%=users.get(i).getId()%>&action=unblock&role=<%=users.get(i).getRole()%>"
-							class="btn btn-outline-success text-white">Unblock</a>
+							class="btn btn-outline-success text-white">☑️ Unblock</a>
 						</td>
 						<%
 						}
@@ -190,7 +189,7 @@ to {
 		<!--user table ends  -->
 
 		<!-- manage job listing starts -->
-		<div class="card p-4 mb-5 shadow mycard">
+		<div class="card p-4 mb-5 mycard">
 			<h4 class="mb-3">📋 Manage Job Listings</h4>
 			<%
 			List<JobPojo> jobs = (List<JobPojo>) request.getAttribute("jobs");
@@ -214,7 +213,7 @@ to {
 						<td><%=jobs.get(i).getCompany()%></td>
 						<td><%=jobs.get(i).getApplicantsCount()%></td>
 						<td><a href="DeleteJobServlet?jobId=<%=jobs.get(i).getId()%>"
-							class="btn btn-outline-danger text-white">Remove</a></td>
+							class="btn btn-outline-danger text-white">🗑️ Remove</a></td>
 					</tr>
 					<%
 					}
