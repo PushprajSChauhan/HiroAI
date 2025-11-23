@@ -1,7 +1,7 @@
 <!-- navbar code starts here -->
 <nav class="navbar navbar-expand-lg">
 	<div class="container-fluid p-1 px-3">
-		<a href="./index.jsp" class="navbar-brand fw-bold"><%=application.getAttribute("appName")%></a>
+		<a href="./index.jsp" class="navbar-brand"><%=application.getAttribute("appName")%></a>
 
 		<button type="button" class="navbar-toggler" data-bs-toggle="collapse"
 			data-bs-target="#mynav">
