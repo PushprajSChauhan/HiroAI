@@ -32,53 +32,18 @@
 	color: #faf8f1;
 }
 
-@
-keyframes glowShift { 0% {
+@keyframes glowShift { 
+0% {
 	box-shadow: 0 0 20px rgba(250, 234, 177, 0.7);
 	border-color: #faeab1;
 }
-
-50
-%
-{
-box-shadow
-:
-0
-0
-20px
-rgba(
-226
-,
-226
-,
-255
-,
-0.7
-);
-border-color
-:
-#4e54c8;
+50% {
+	box-shadow: 0 0 20px rgba(226, 226, 255, 0.7);
+	border-color: #4e54c8;
 }
-100
-%
-{
-box-shadow
-:
-0
-0
-20px
-rgba(
-250
-,
-234
-,
-177
-,
-0.7
-);
-border-color
-:
-#faeab1;
+100% {
+	box-shadow: 0 0 20px rgba(250, 234, 177, 0.7);
+	border-color: #faeab1;
 }
 }
 .applicant-card:hover {
@@ -340,3 +305,4 @@ to {
 	</script>
 </body>
 </html>
+
