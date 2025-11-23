@@ -50,7 +50,6 @@ Key highlights:
 - Email-based registration with OTP verification
 - Session handling and role-based access control
 - Automated email notifications (OTP, application updates)
-- Responsive, mobile-first UI using Bootstrap and modern design patterns
 
 ---
 
@@ -193,7 +192,7 @@ Edit `src/main/webapp/WEB-INF/web.xml` to change app context parameters if neede
 
 ---
 
-## 🧭 ER Diagram (Database Model)
+## 🧠 ER Diagram (Database Model)
 
 The following Mermaid ER diagram represents the database schema used by HiroAI (parsed from `hiresense_db.sql`). This diagram is embedded as Mermaid code so it renders on GitHub.
 
@@ -442,12 +441,23 @@ Project Link: https://github.com/PushprajSChauhan/HiroAI
 ## 🙏 Acknowledgments
 
 - Affinda — Resume parsing API  
-- Perplexity — AI Chat Assistance API  
+- Perplexity AI — Chat Assistance API  
 - Bootstrap — Frontend framework  
-- Hibernate — ORM framework  
 - Font Awesome — Icons  
 - SweetAlert2 — Alerts UI
+- Uiverse — Animations and UI
 
+---
+
+## 📌 Future Enhancements
+
+- **Real Time Chat Engagement:** Communication between Employer and Job Seeker.
+- **Company Review Analyzer:** Users get chance to know more about a company reviews and salary insights.
+- **Personalized Learning Path Generator:** Based on user skills, recommendations can be given for developing projects, resources and roadmaps.
+- **Intelligent Interview Prep Module:** Mock face-to-face interviews with AI with real-time feedback.
+- **Job Recommendation Engine:** Users can be given notifications and recommendations about new job postings suitable for their skillsets.
+- **Responsive UI:** Enhanced mobile and desktop experience.
+  
 ---
 
 <div align="center">
