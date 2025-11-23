@@ -1,15 +1,14 @@
 package hiroaiapp.controllers;
 
+import java.io.IOException;
+
+import hiroaiapp.dao.JobDAO;
+import hiroaiapp.pojo.JobPojo;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
-import java.io.IOException;
-
-import hiroaiapp.dao.JobDAO;
 
 public class ToggleJobStatusServlet extends HttpServlet {
 	
@@ -23,8 +22,17 @@ public class ToggleJobStatusServlet extends HttpServlet {
 		
 		int jobId=Integer.parseInt(request.getParameter("jobId"));
 		try {
+			JobPojo job = JobDAO.getJobById(jobId);
+			String currentStatus = job.getStatus();
+			
+			// Toggle the status
 			JobDAO.toggleJobStatus(jobId);
-			response.sendRedirect("EmployerDashboardServlet");
+			
+			// Determine what the new status will be after toggle
+			String newStatus = "active".equals(currentStatus) ? "deactivated" : "activated";
+			
+			// Redirect with appropriate parameter
+			response.sendRedirect("EmployerDashboardServlet?toggle=" + newStatus);
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();
