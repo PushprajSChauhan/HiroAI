@@ -13,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import hiroaiapp.utils.AIResponseFormatter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -77,8 +78,18 @@ public class ChatAssistantServlet extends HttpServlet {
                 if (choices.length() > 0) {
                     JSONObject firstChoice = choices.getJSONObject(0);
                     JSONObject aiMsg = firstChoice.getJSONObject("message");
+                    
+                 // CLEAN THE RAW RESPONSE HERE
+					String rawContent = aiMsg.getString("content");
+					String cleanedContent = AIResponseFormatter.improveAIResponse(rawContent);
+					
+					// Create new message with cleaned content
+					JSONObject cleanedAiMsg = new JSONObject();
+					cleanedAiMsg.put("role", "assistant");
+					cleanedAiMsg.put("content", cleanedContent);
+                    
                     // Add AI reply to history
-                    chatHistory.add(aiMsg);
+                    chatHistory.add(cleanedAiMsg);
                 } else {
                     //API Error, add notice
                     JSONObject errorMsg = new JSONObject();
