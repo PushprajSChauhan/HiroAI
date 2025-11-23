@@ -18,11 +18,11 @@
 <link href="css/style.css" rel="stylesheet">
 <style>
 .mycard {
-	background: #bdd5fa55;
+	background: rgba(255, 255, 255, 0.1);
 	backdrop-filter: blur(10px);
 	border: 1px solid rgba(255, 255, 255, 0.3);
 	border-radius: 20px;
-	color: #faf8f1;
+	box-shadow: 0 0 5px #00e8f0;
 }
 
 .is-animated {
@@ -60,25 +60,24 @@
 }
 
 /* STANDARD KEYFRAMES */
-@
-keyframes expandProperty {from { width:0px;
+@keyframes expandProperty {from { width:0px;
 	
 }
 
 to {
-	width: var(--dynamic-width);
+	width: var(--dynamic-width, 400px);
+	/* Fallback to 400px if variable not set */
 }
 
 }
 
 /* WebKit fallback */
-@
--webkit-keyframes expandProperty {from { width:0px;
+@-webkit-keyframes expandProperty {from { width:0px;
 	
 }
 
 to {
-	width: 650px;
+	width: 400px;
 }
 }
 </style>
@@ -92,7 +91,15 @@ to {
 
 	// Backend se ye data pass hoga
 	String[] personalDetails = (String[]) request.getAttribute("personalDetails");
-	String applicantName = personalDetails[0];
+	String fullName = personalDetails[0];
+
+	// Extract only first name for display
+	String firstName = "Applicant";
+	if (fullName != null && !fullName.trim().isEmpty()) {
+		String[] nameParts = fullName.trim().split("\\s+");
+		firstName = nameParts[0]; // Get first word as first name
+	}
+
 	String resumeSummary = (String) request.getAttribute("summary");
 	String[] education = (String[]) request.getAttribute("education");
 	String[] workExperience = (String[]) request.getAttribute("workEx");
@@ -101,36 +108,39 @@ to {
 	<%@ include file="includes/header.jsp"%>
 
 	<main class="container py-5">
-		<!-- Applicant Name as Heading -->
+		<!-- Applicant Name as Heading - Only First Name -->
 		<div class="property is-animated">
 			<h1 class="welcome-title code-typing">
 				👤
-				<%=applicantName != null ? applicantName : "Applicant Details"%>
+				<%=firstName%>'s Details
 			</h1>
 		</div>
 
 		<!-- Personal Details Card -->
-		<div class="mycard shadow p-4 mb-4">
+		<div class="mycard p-4 mb-4">
 			<h4 class="job-section-title">
 				<i class="fas fa-id-card me-2"></i>Personal Details
 			</h4>
 			<%
-			for (String s : personalDetails) {
-				if (s.contains(".com")) {
-					String cleanUrl = s.replaceAll("\\s+", "");
+			for (int i = 0; i < personalDetails.length; i++) {
+				String detail = personalDetails[i];
+
+				// Handle URLs
+				if (detail.contains(".com")) {
+					String cleanUrl = detail.replaceAll("\\s+", "");
 
 					// https:// add karo agar nahi hai to
 					if (!cleanUrl.startsWith("http://") && !cleanUrl.startsWith("https://")) {
 				cleanUrl = "https://" + cleanUrl;
 					}
 			%>
-			<a href="<%=cleanUrl%>" class="text-white"> <%=s.trim()%>
+			<a href="<%=cleanUrl%>" class="text-white" target="_blank"> <%=detail.trim()%>
 			</a><br>
 			<%
 			} else {
 			%>
 			<p class="text-white">
-				<%=s%>
+				<%=detail%>
 			</p>
 			<%
 			}
@@ -139,32 +149,30 @@ to {
 		</div>
 
 		<!-- Resume Summary Card -->
-		<div class="mycard shadow p-4 mb-4">
+		<div class="mycard p-4 mb-4">
 			<h4 class="job-section-title">
 				<i class="fas fa-file-alt me-2"></i>Resume Summary
 			</h4>
-			<p>
+			<p class="text-white">
 				<%=resumeSummary != null ? resumeSummary : "No summary available"%>
 			</p>
 		</div>
 
 		<!-- Education Details Card -->
-		<div class="mycard shadow p-4 mb-4">
+		<div class="mycard p-4 mb-4">
 			<h4 class="job-section-title">
 				<i class="fas fa-graduation-cap me-2"></i>Education
 			</h4>
 			<%
 			if (education.length != 0) {
-				for (String s : education) {
-			%>
-			<%
-			if (s.length() == 0) {
+				for (int i = 0; i < education.length; i++) {
+					if (education[i].length() == 0 || i == 0) {
 				continue;
-			}
+					}
 			%>
 
 			<p class="text-white">
-				<%=s%>
+				<%=education[i]%>
 			</p>
 
 			<%
@@ -178,16 +186,19 @@ to {
 		</div>
 
 		<!-- Work Experience Card -->
-		<div class="mycard shadow p-4 mb-4">
+		<div class="mycard p-4 mb-4">
 			<h4 class="job-section-title">
 				<i class="fas fa-briefcase me-2"></i>Work Experience
 			</h4>
 			<%
 			if (workExperience.length != 0) {
-				for (String s : workExperience) {
+				for (int i = 0; i < workExperience.length; i++) {
+					if (workExperience[i].length() == 0 || i == 0) {
+				continue;
+					}
 			%>
 			<p class="text-white">
-				<%=s%>
+				<%=workExperience[i]%>
 			</p>
 			<%
 			}
@@ -200,7 +211,7 @@ to {
 		</div>
 
 		<!-- Skills Card -->
-		<div class="mycard shadow p-4 mb-4">
+		<div class="mycard p-4 mb-4">
 			<h4 class="job-section-title">
 				<i class="fas fa-tools me-2 mb-4"></i>Skills
 			</h4>
@@ -262,10 +273,14 @@ to {
 
 			if (textElement && container) {
 				// Get exact required width (content width)
-				const requiredWidth = textElement.scrollWidth + "px";
+				const requiredWidth = (textElement.scrollWidth + 10) + "px";
 
 				// Apply the value to CSS variable
 				container.style.setProperty("--dynamic-width", requiredWidth);
+
+				// Debug: Log the values
+				console.log("Text scrollWidth:", textElement.scrollWidth);
+				console.log("Required width:", requiredWidth);
 			}
 		};
 	</script>
