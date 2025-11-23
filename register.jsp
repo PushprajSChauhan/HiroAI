@@ -4,17 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title><%=application.getAttribute("appName")%></title>
+<title>Register | <%=application.getAttribute("appName")%></title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous" />
+	__integrity__="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	__crossorigin__="anonymous" />
 <link rel="stylesheet" href="css/style.css" />
 <script>
 	function showSpinner() {
-		document.querySelector(".btn-login").disabled = true;
-		document.getElementById("loadingSpinner").classList.remove("d-none");
+		document.querySelector(".btn-register").disabled = true;
+		document.getElementById("fullPageLoader").classList.remove("d-none");
 	}
 </script>
 </head>
@@ -22,13 +22,8 @@
 	<%@ include file="includes/header.jsp"%>
 	<!-- registration form starts -->
 	<div class="login-container mt-5 mb-5">
-		<div class="login-card shadow">
-			<h3 class="text-center mb-5">Create Your Account</h3>
-
-			<div id="loadingSpinner" class="text-center d-none mt-3">
-				<div class="spinner-border text-light"></div>
-				<p class="mt-2 ">Sending OTP, please wait...</p>
-			</div>
+		<div class="login-card">
+			<h1 class="text-center mb-4">Create Your Account</h1>
 
 			<form action="SendRegisterOTPServlet" method="post"
 				onsubmit="showSpinner()">
@@ -54,15 +49,49 @@
 						<option value="employer">Employer</option>
 					</select>
 				</div>
-				<button class="btn btn-login mt-2" type="submit">Register</button>
+				<button class="btn btn-register mt-2 lr-custom-btn mx-auto text-light" type="submit"><span>Register</span></button>
 			</form>
 			<div class="text-center mt-3">
 				<small>Already have an account? <a href="login.jsp"
-					class="text-warning">Login</a></small>
+					class="text-light">Login</a></small>
 			</div>
 		</div>
 	</div>
 	<!-- registration form ends -->
+
+	<!-- ---------- FULL PAGE LOADER OVERLAY ---------- -->
+	<div id="fullPageLoader" class="otp-loader-overlay d-none">
+		<div class="loader-wrapper">
+			<div class="loader-line">
+				<span class="loader-letter">S</span>
+				<span class="loader-letter">e</span>
+				<span class="loader-letter">n</span>
+				<span class="loader-letter">d</span>
+				<span class="loader-letter">i</span>
+				<span class="loader-letter">n</span>
+				<span class="loader-letter">g</span>
+				<span class="loader-letter">&nbsp;</span>
+				<span class="loader-letter">O</span>
+				<span class="loader-letter">T</span>
+				<span class="loader-letter">P</span>
+			</div>
+			<div class="loader-line">
+				<span class="loader-letter">P</span>
+				<span class="loader-letter">l</span>
+				<span class="loader-letter">e</span>
+				<span class="loader-letter">a</span>
+				<span class="loader-letter">s</span>
+				<span class="loader-letter">e</span>
+				<span class="loader-letter">&nbsp;</span>
+				<span class="loader-letter">W</span>
+				<span class="loader-letter">a</span>
+				<span class="loader-letter">i</span>
+				<span class="loader-letter">t</span>
+			</div>
+
+			<div class="loader"></div>
+		</div>
+	</div>
 
 	<%
 	if ("true".equals(request.getParameter("showOtp"))) {
@@ -107,7 +136,7 @@
 	<%@ include file="includes/footer.jsp"%>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-		crossorigin="anonymous"></script>
+		__integrity__="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		__crossorigin__="anonymous"></script>
 </body>
 </html>
