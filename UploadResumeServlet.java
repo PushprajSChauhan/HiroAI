@@ -80,8 +80,19 @@ public class UploadResumeServlet extends HttpServlet {
 		catch(Exception ex) {
 			ex.printStackTrace();
 		}
-//		response.sendRedirect("userDashboard.jsp"); BELOW IS NEERAJ KA CODE
-		response.sendRedirect("UserDashboardServlet");
+//		response.sendRedirect("userDashboard.jsp"); 
+		String jobIdParam = request.getParameter("jobId");
+		if (jobIdParam != null && !jobIdParam.isEmpty()) {
+		    // Redirect to apply for the specific job
+		    int jobId = Integer.parseInt(jobIdParam);
+		    String skills = request.getParameter("skills");
+		    // Forward to ApplyJobServlet
+		    request.setAttribute("jobId", jobId);
+		    request.getRequestDispatcher("ApplyJobServlet").forward(request, response);
+		} else {
+		    // Just uploaded resume without applying
+		    response.sendRedirect("UserDashboardServlet");
+		}
 	}
 
 }
