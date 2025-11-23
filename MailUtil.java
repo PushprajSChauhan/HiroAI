@@ -30,7 +30,7 @@ public class MailUtil {
 	}
 	
 	public static void sendNewApplicationNotificationToEmployer(String employerName, String toEmail, String applicant, String jobTitle) throws MessagingException{
-		String subject="✅ New application received for "+jobTitle;
+		String subject="🔔 New application received for "+jobTitle;
 		String body="\n\nDear "+employerName+",\n\nA new candidate "+applicant+" has applied for the position of "+jobTitle+".";
 		body+="\n\nYou can review the applicant details in your dashboard.\n\n"+"Regards, Team HiroAI";
 		sendTextEmail(toEmail,subject,body);
@@ -44,16 +44,17 @@ public class MailUtil {
 		        + "They will contact you soon regarding further interview steps.\n\n"
 		        + "Wishing you all the best.\n\n"
 		        + "Regards,\nTeam HiroAI";
+		sendTextEmail(toEmail,subject,body);
 	}
 	
 	public static void sendRejectionConfirmation(String name, String toEmail, String jobTitle, String company) throws MessagingException{
-		String subject = "Update on Your Application for " + jobTitle;
+		String subject = "ℹ️ Update on Your Application for " + jobTitle;
 		String body = "\n\nDear " + name + ",\n\n"
 		        + "Thank you for applying for the position of **" + jobTitle + "** at **" + company + "**.\n\n"
 		        + "After careful review, we regret to inform you that your application has *not been shortlisted* at this stage.\n"
 		        + "Please do not be discouraged — we encourage you to apply for future openings that match your profile.\n\n"
 		        + "We appreciate your interest and wish you success in your career ahead.\n\n"
 		        + "Regards,\nTeam HiroAI";
-
+		sendTextEmail(toEmail,subject,body);
 	}
 }
