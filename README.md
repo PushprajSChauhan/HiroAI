@@ -19,6 +19,7 @@ Key highlights:
 - Email Integration: OTP verification and notifications
 - Modern UI: Responsive glassmorphism design with animations
 - Secure: Session-based authentication with role management
+- AI Assistance: Support of Perplexity AI for resolving user queries
 
 ---
 
@@ -85,22 +86,22 @@ HiroAI follows a three-tier architecture:
 
 
 ```
-                  ┌─────────────────────────────────────┐
-                  │         Presentation Layer          │
-                  │  (JSP, CSS, JavaScript, Bootstrap)  │
-                  └─────────────────┬───────────────────┘
-                                    │
-                                    ▼
-                  ┌─────────────────────────────────────┐
-                  │       Business Logic Layer          │
-                  │        (Servlets, DAOs)             │
-                  └─────────────────┬───────────────────┘
-                                    │
-                                    ▼
-                  ┌─────────────────────────────────────┐
-                  │         Data Access Layer           │
-                  │             (MySQL)                 │
-                  └─────────────────────────────────────┘
+┌─────────────────────────────────────┐
+│         Presentation Layer          │
+│  (JSP, CSS, JavaScript, Bootstrap)  │
+└─────────────────┬───────────────────┘
+                  │
+                  ▼
+┌─────────────────────────────────────┐
+│       Business Logic Layer          │
+│        (Servlets, DAOs)             │
+└─────────────────┬───────────────────┘
+                  │
+                  ▼
+┌─────────────────────────────────────┐
+│         Data Access Layer           │
+│             (MySQL)                 │
+└─────────────────────────────────────┘
 ```
 
 Package structure (top-level):
@@ -251,7 +252,7 @@ erDiagram
 ## ▶️ Running the Application
 
 1. Start MySQL and ensure DB and tables are created.  
-2. Ensure `config.properties` contains correct DB and API/email credentials.  
+2. Ensure web.xml contains correct DB and API/email credentials.  
 3. Build and deploy WAR to Tomcat (see Installation).  
 4. Visit `http://localhost:8080/` and register a new user.  
 5. For employer functionality, register with the `employer` role.
@@ -293,6 +294,7 @@ HiroAI integrates Affinda Resume Parser API for resume parsing and skill extract
 ```properties
 api.key=YOUR_AFFINDA_API_KEY
 ```
+> Note: The Affinda API offers 14 days free trial for its services with 200 free resume parsing credits. For exploring more credit based usage plans, visit their website.
 
 #### Features Used
 
@@ -351,6 +353,7 @@ hiroaiapp/
 │       │        │   ├── LogoutServlet.java
 │       │        │   ├── ViewFullDetailsServlet.java
 │       │        │   ├── DeleteJobServlet.java
+│       │        │   ├── ChatAssistantServlet.java
 │       │        │   └── SendRegisterOTPServlet.java
 │       │        ├── dao/
 │       │        │   ├── UserDAO.java
@@ -366,6 +369,7 @@ hiroaiapp/
 │       │        │   ├── AffindaAPI.java
 │       │        │   ├── MailUtil.java
 │       │        │   ├── MailConfig.java
+│       │        │   ├── AIResponseFormatter.java
 │       │        │   ├── MyAuthenticator.java
 │       │        └── dbutils/
 │       │            ├── DBConnection.java
