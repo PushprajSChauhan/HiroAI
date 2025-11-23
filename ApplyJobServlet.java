@@ -52,13 +52,13 @@ public class ApplyJobServlet extends HttpServlet {
 			UserPojo user2=UserDAO.getUserById(job.getEmployerId()); //here user is employer
 			MailUtil.sendNewApplicationNotificationToEmployer(user2.getName(), user2.getEmail(), user1.getName(), job.getTitle());
 			
-//			response.sendRedirect("userDashboard.jsp?success=applied"); BELOW IS NEERAJ KA CODE
+//			response.sendRedirect("userDashboard.jsp?success=applied"); 
 			response.sendRedirect("UserDashboardServlet?success=applied");
 
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();
-//			response.sendRedirect("userDashboard.jsp?error=apply_failed"); BELOW IS NEERAJ KA CODE
+//			response.sendRedirect("userDashboard.jsp?error=apply_failed"); 
 			response.sendRedirect("error.jsp");
 
 		}
