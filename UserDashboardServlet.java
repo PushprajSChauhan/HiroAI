@@ -59,7 +59,7 @@ public class UserDashboardServlet extends HttpServlet {
 			}
 
 			List<ApplicationPojo> appliedList = ApplicationDAO.getApplicationsByUserId(userId);
-//			ab jitni bhi jobs keliye user ne apply kiya hai unhe ApplicationPojo mei se nikal kar ek Set mei daalke aage bhejna hai on UserDashboard JSP to show whether the user has applied for that Job or not based on the Job ID
+//			ab jitni bhi jobs keliye user ne apply kiya hai unhe ApplicationPojo mei se nikal kar ek Map mei daalke aage bhejna hai on UserDashboard JSP to show whether the user has applied for that Job or not based on the Job ID
 			Map<Integer, String> appliedJobIds = new HashMap<>();
 			for (ApplicationPojo app : appliedList) {
 				appliedJobIds.put(app.getJobId(), app.getStatus());
@@ -82,3 +82,4 @@ public class UserDashboardServlet extends HttpServlet {
 		}
 	}
 }
+
