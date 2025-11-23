@@ -17,8 +17,8 @@
 <body>
 	<%@ include file="includes/header.jsp"%>
 	<div class="login-container">
-		<div class="login-card shadow">
-			<h3 class="text-center mb-4">Welcome Back</h3>
+		<div class="login-card">
+			<h1 class="text-center mb-4">Welcome Back</h1>
 
 			<%
 			String error = (String) request.getAttribute("error"); //error tab ayegi jab login attempt fail hogaya ho and LoginServlet ne vapis bhej diya ho
@@ -48,11 +48,11 @@
 						placeholder="Password" required />
 				</div>
 
-				<button type="submit" class="btn btn-login mt-2">Login</button>
+				<button type="submit" class="lr-custom-btn mx-auto mt-3"><span>Login</span></button>
 
 				<div class="text-center mt-3">
 					<small>Don't have an account? <a href="register.jsp"
-						class="text-warning">Register</a></small>
+						class="text-light">Register</a></small>
 				</div>
 			</form>
 		</div>
