@@ -30,8 +30,11 @@ public class ApplyJobServlet extends HttpServlet {
 		}
 		
 		int userId=(Integer)session.getAttribute("userId");
-		int jobId=Integer.parseInt(request.getParameter("jobId"));
-		int score=Integer.parseInt(request.getParameter("score"));
+		Integer jobIdAttr = (Integer) request.getAttribute("jobId");
+	    int jobId = (jobIdAttr != null) ? jobIdAttr : Integer.parseInt(request.getParameter("jobId"));
+	    
+	    Integer scoreAttr = (Integer) request.getAttribute("score");
+	    int score = (scoreAttr != null) ? scoreAttr : Integer.parseInt(request.getParameter("score"));
 		
 		try {
 			String resumePath="N/A";
@@ -65,3 +68,4 @@ public class ApplyJobServlet extends HttpServlet {
 	}
 
 }
+
