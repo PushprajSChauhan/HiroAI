@@ -218,52 +218,61 @@ to {
 		<!-- search and filter jobs section ends -->
 		<!-- now we have to fetch all Jobs posted by the employer and show them in a table -->
 		<%
-		java.util.List<hiroaiapp.pojo.JobPojo> jobList = (java.util.List<hiroaiapp.pojo.JobPojo>) request
-				.getAttribute("jobList");
-		%>
-		<div class="card p-4 mb-5 mycard">
-			<h4 class="mb-3">
-				Jobs Posted by
-				<%=jobList.get(0).getCompany()%></h4>
-			<table class="table text-light text-center">
-				<thead>
-					<tr>
-						<th>Job Title</th>
-						<th>Applicants</th>
-						<th>Status</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<%
-					if (jobList != null && !jobList.isEmpty()) {
-						for (hiroaiapp.pojo.JobPojo job : jobList) {
-					%>
-					<tr>
-						<td><%=job.getTitle()%></td>
-						<td><%=job.getApplicantsCount()%></td>
-						<td><%=job.getStatus().toUpperCase()%></td>
-						<td class="gap-3"><a
-							href="ViewApplicantsServlet?jobId=<%=job.getId()%>"
-							class="btn btn-sm text-light btn-outline-info">👀 View</a> <a
-							href="ToggleJobStatusServlet?jobId=<%=job.getId()%>"
-							class="btn btn-sm <%="active".equals(job.getStatus()) ? "btn-outline-danger text-light" : "btn-outline-warning text-light"%>"><%="active".equals(job.getStatus()) ? "🔽 Deactivate" : "🔼 Activate"%></a>
-						</td>
-					</tr>
-					<%
-					}
-					} else {
-					%>
-					<p class="text-center text-warning">
-						<i class="fas fa-exclamation-triangle me-2"></i>No Jobs Posted
-						Yet!
-					</p>
-					<%
-					}
-					%>
-				</tbody>
-			</table>
-		</div>
+java.util.List<hiroaiapp.pojo.JobPojo> jobList = (java.util.List<hiroaiapp.pojo.JobPojo>) request.getAttribute("jobList");
+String companyName = (String) session.getAttribute("companyName"); // Get from session if available
+%>
+<div class="card p-4 mb-5 mycard">
+    <%
+    if (jobList != null && !jobList.isEmpty()) {
+    %>
+        <h4 class="mb-3">
+            Jobs Posted by <%=jobList.get(0).getCompany()%>
+        </h4>
+        <table class="table text-light text-center">
+            <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th>Applicants</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%
+                for (hiroaiapp.pojo.JobPojo job : jobList) {
+                %>
+                <tr>
+                    <td><%=job.getTitle()%></td>
+                    <td><%=job.getApplicantsCount()%></td>
+                    <td><%=job.getStatus().toUpperCase()%></td>
+                    <td class="gap-3">
+                        <a href="ViewApplicantsServlet?jobId=<%=job.getId()%>"
+                           class="btn btn-sm text-light btn-outline-info">👀 View</a>
+                        <a href="ToggleJobStatusServlet?jobId=<%=job.getId()%>"
+                           class="btn btn-sm <%="active".equals(job.getStatus()) ? "btn-outline-danger text-light" : "btn-outline-warning text-light"%>">
+                           <%="active".equals(job.getStatus()) ? "🔽 Deactivate" : "🔼 Activate"%>
+                        </a>
+                    </td>
+                </tr>
+                <%
+                }
+                %>
+            </tbody>
+        </table>
+    <%
+    } else {
+    %>
+        <h4 class="mb-3">Your Job Postings</h4>
+        <div class="text-center text-warning py-5">
+            <p class="fs-5">
+                <i class="fas fa-exclamation-triangle me-2"></i>No Jobs Posted Yet!
+            </p>
+            <p class="text-light">Start by posting your first job using the form above.</p>
+        </div>
+    <%
+    }
+    %>
+</div>
 
 	</main>
 	<!-- now we will use Sweet Alert library to generate custom popups for notifying about job posting action status -->
