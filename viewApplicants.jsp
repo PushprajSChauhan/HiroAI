@@ -32,18 +32,52 @@
 	color: #faf8f1;
 }
 
-@keyframes glowShift { 
-0% {
+@keyframes glowShift { 0% {
 	box-shadow: 0 0 20px rgba(250, 234, 177, 0.7);
 	border-color: #faeab1;
 }
-50% {
-	box-shadow: 0 0 20px rgba(226, 226, 255, 0.7);
-	border-color: #4e54c8;
+
+50
+%
+{
+box-shadow
+:
+0
+0
+20px
+rgba(
+226
+,
+226
+,
+255
+,
+0.7
+);
+border-color
+:
+#4e54c8;
 }
-100% {
-	box-shadow: 0 0 20px rgba(250, 234, 177, 0.7);
-	border-color: #faeab1;
+100
+%
+{
+box-shadow
+:
+0
+0
+20px
+rgba(
+250
+,
+234
+,
+177
+,
+0.7
+);
+border-color
+:
+#faeab1;
 }
 }
 .applicant-card:hover {
@@ -241,9 +275,9 @@ to {
 						if (obj.getStatus().equals("applied")) {
 						%>
 						<button type="submit" name="status" value="shortlisted"
-							class="btn btn-success btn-sm">Shortlist</button>
+							class="btn btn-outline-success btn-sm">✅ Shortlist</button>
 						<button type="submit" name="status" value="rejected"
-							class="btn btn-danger btn-sm">Reject</button>
+							class="btn btn-outline-danger btn-sm">❌ Reject</button>
 						<%
 						} else if (obj.getStatus().equals("shortlisted")) {
 						%>
@@ -305,4 +339,3 @@ to {
 	</script>
 </body>
 </html>
-
