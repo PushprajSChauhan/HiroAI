@@ -83,16 +83,36 @@ public class UploadResumeServlet extends HttpServlet {
 //		response.sendRedirect("userDashboard.jsp"); 
 		String jobIdParam = request.getParameter("jobId");
 		if (jobIdParam != null && !jobIdParam.isEmpty()) {
-		    // Redirect to apply for the specific job
-		    int jobId = Integer.parseInt(jobIdParam);
-		    String skills = request.getParameter("skills");
-		    // Forward to ApplyJobServlet
-		    request.setAttribute("jobId", jobId);
-		    request.getRequestDispatcher("ApplyJobServlet").forward(request, response);
+
+			int jobId = Integer.parseInt(jobIdParam);
+			String skills = request.getParameter("skills");
+			try {
+				// Get the job details
+				JobPojo job = JobDAO.getJobById(jobId);
+
+				// Calculate match score
+				int score = 0;
+				List<ResumeAnalysisLogPojo> logs = ResumeAnalysisLogDAO.getLogsByUser(userId);
+				if (!logs.isEmpty()) {
+					JSONObject obj = new JSONObject(logs.get(0).getJsonResult());
+					List<String> userSkills = AffindaAPI.extractSkills(obj.toString());
+					score = AffindaAPI.calculateMatchScore(job.getSkills(), userSkills);
+				}
+
+				// Set both as request parameters for forwarding
+				request.setAttribute("jobId", jobId);
+				request.setAttribute("score", score);
+
+				request.getRequestDispatcher("ApplyJobServlet").forward(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+				response.sendRedirect("error.jsp");
+			}
 		} else {
-		    // Just uploaded resume without applying
-		    response.sendRedirect("UserDashboardServlet");
+			// Just uploaded resume without applying
+			response.sendRedirect("UserDashboardServlet");
 		}
 	}
 
 }
+
