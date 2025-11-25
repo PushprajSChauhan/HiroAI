@@ -399,12 +399,9 @@ hiroaiapp/
 
 ---
 
-## 🖼 Screenshots & Demo
+## 🎬 Demo Video
 
-(Placeholders — add your screenshots and demo video files to `docs/screenshots/` and a demo link when ready.)
-
-- Demo video: docs/demo/hiroai-demo.mp4 (placeholder)  
-- Screenshots: docs/screenshots/home.png, register.png, login.png, user_dashboard.png, employer_dashboard.png, view_applicants.png, admin_panel.png
+> **Click [this link](https://drive.google.com/file/d/16VueDdjppmu-G_nBPm8ThKoevbNIwiCo/view?usp=drive_link) to watch the full demo video of HiroAI.**
 
 ---
 
