@@ -1,9 +1,9 @@
 # HiroAI
 
-[![Java](https://img.shields.io/badge/Java-17-orange.svg)]()
-[![MySQL](https://img.shields.io/badge/MySQL-8.0-blue.svg)]()
+[![Java](https://img.shields.io/badge/Java-17-orange?style=flat&logo=java)](https://www.oracle.com/java/)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=flat&logo=mysql&logoColor=white)](https://www.mysql.com/)
 [![Tomcat](https://img.shields.io/badge/Tomcat-10.x-lightgrey.svg)]()
-[![Bootstrap](https://img.shields.io.badge/Bootstrap-5.3.8.purple.svg)]()
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.8-7952B3?style=flat&logo=bootstrap)](https://getbootstrap.com/)
 
 HiroAI is an intelligent recruitment platform that revolutionizes the hiring process through AI-powered resume analysis and smart candidate matching. The platform connects job seekers with employers while automating tedious recruitment tasks through advanced resume parsing and skill-matching algorithms.
 
@@ -253,7 +253,9 @@ erDiagram
     USERS ||--o{ RESUME_ANALYSIS_LOGS : "has"
 ```
 
-## Use Case Diagram
+### Use Case Diagram
+
+```mermaid
 flowchart LR
     %% Actors
     JobSeeker[Job Seeker]
@@ -302,7 +304,143 @@ flowchart LR
     style ManageUsers fill:#B71C1C,stroke:#7F0000,stroke-width:2px,color:#fff
     style BlockUser fill:#B71C1C,stroke:#7F0000,stroke-width:2px,color:#fff
     style ViewJobs fill:#B71C1C,stroke:#7F0000,stroke-width:2px,color:#fff
+```
 
+### Data Flow Diagram
+
+```mermaid
+flowchart TB
+    subgraph Actors["ACTORS"]
+        JobSeeker[Job Seeker]
+        Employer[Employer]
+        Admin[Administrator]
+    end
+
+    subgraph PresentationLayer["PRESENTATION LAYER - JSP Pages"]
+        LoginPage[Login/Register Page]
+        UserDashboard[User Dashboard]
+        EmployerDashboard[Employer Dashboard]
+        AdminPanel[Admin Panel]
+        ChatPage[Chat Page]
+    end
+
+    subgraph BusinessLayer["BUSINESS LOGIC LAYER - Servlets"]
+        AuthServlet[Authentication Servlet]
+        UploadServlet[Upload Resume Servlet]
+        ApplyServlet[Apply Job Servlet]
+        PostServlet[Post Job Servlet]
+        ViewServlet[View Applicants Servlet]
+        ChatServlet[Chat Servlet]
+        AdminServlet[Admin Servlet]
+    end
+
+    subgraph ExternalAPIs["EXTERNAL APIs"]
+        AffindaAPI["Affinda API - Resume Parser"]
+        PerplexityAPI["Perplexity Pro - AI Assistant"]
+    end
+
+    subgraph DataLayer["DATA ACCESS LAYER - MySQL Database"]
+        UsersTable[(Users Table)]
+        JobsTable[(Jobs Table)]
+        ApplicationsTable[(Applications Table)]
+        ResumeLogsTable[(Resume Analysis Logs)]
+    end
+
+    %% Job Seeker Flow
+    JobSeeker -->|Step 1: Login| LoginPage
+    LoginPage --> AuthServlet
+    AuthServlet --> UsersTable
+
+    JobSeeker -->|Step 2: Upload Resume| UserDashboard
+    UserDashboard --> UploadServlet
+    UploadServlet -->|Send PDF| AffindaAPI
+    AffindaAPI -->|Return Parsed Data| UploadServlet
+    UploadServlet --> ResumeLogsTable
+
+    JobSeeker -->|Step 3: Browse & Apply| UserDashboard
+    UserDashboard --> ApplyServlet
+    ApplyServlet --> ApplicationsTable
+    JobsTable -->|Fetch Jobs + Calculate Match Score| UserDashboard
+
+    JobSeeker -->|Step 4: Ask Career Question| ChatPage
+    ChatPage --> ChatServlet
+    ChatServlet -->|Send Query| PerplexityAPI
+    PerplexityAPI -->|Return AI Response| ChatServlet
+    ChatServlet --> ChatPage
+
+    %% Employer Flow
+    Employer -->|Step 1: Login| LoginPage
+    Employer -->|Step 2: Post Job| EmployerDashboard
+    EmployerDashboard --> PostServlet
+    PostServlet --> JobsTable
+
+    Employer -->|Step 3: View Applicants| EmployerDashboard
+    EmployerDashboard --> ViewServlet
+    ApplicationsTable -->|Fetch Applications| ViewServlet
+    ResumeLogsTable -->|Fetch Resume Data| ViewServlet
+    ViewServlet -->|Update Status| ApplicationsTable
+
+    %% Admin Flow
+    Admin -->|Manage System| AdminPanel
+    AdminPanel --> AdminServlet
+    AdminServlet --> UsersTable
+    AdminServlet --> JobsTable
+
+    %% Styling with better contrast
+    style AffindaAPI fill:#E65100,stroke:#BF360C,stroke-width:3px,color:#fff
+    style PerplexityAPI fill:#00695C,stroke:#004D40,stroke-width:3px,color:#fff
+    style DataLayer fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#fff
+    style ExternalAPIs fill:#F57F17,stroke:#E65100,stroke-width:2px,color:#fff
+    style BusinessLayer fill:#303F9F,stroke:#1A237E,stroke-width:2px,color:#fff
+    style PresentationLayer fill:#0277BD,stroke:#01579B,stroke-width:2px,color:#fff
+    style Actors fill:#C2185B,stroke:#880E4F,stroke-width:2px,color:#fff
+
+    style JobSeeker fill:#1976D2,stroke:#0D47A1,stroke-width:2px,color:#fff
+    style Employer fill:#F57C00,stroke:#E65100,stroke-width:2px,color:#fff
+    style Admin fill:#C62828,stroke:#8E0000,stroke-width:2px,color:#fff
+```
+
+### System Workflow
+
+```mermaid
+sequenceDiagram
+    participant JS as Job Seeker
+    participant SYS as System
+    participant AFF as Affinda API
+    participant DB as Database
+    participant EMP as Employer
+    participant AI as Perplexity AI
+
+    JS->>SYS: Register & Login
+    SYS->>DB: Create User Account
+
+    JS->>SYS: Upload Resume (PDF)
+    SYS->>AFF: Send Resume for Parsing
+    AFF-->>SYS: Return Parsed Data (Skills, Experience)
+    SYS->>DB: Store Resume Analysis
+
+    JS->>SYS: Browse Jobs
+    SYS->>DB: Fetch Available Jobs
+    DB-->>SYS: Job Listings
+    SYS->>SYS: Calculate Match Scores
+    SYS-->>JS: Display Jobs with Scores
+
+    JS->>SYS: Apply for Job
+    SYS->>DB: Create Application
+
+    JS->>SYS: Chat Query
+    SYS->>AI: Send Message
+    AI-->>SYS: AI Response
+    SYS-->>JS: Display Response
+
+    EMP->>SYS: View Applicants
+    SYS->>DB: Fetch Applications
+    DB-->>SYS: Applicant Data with Scores
+    SYS-->>EMP: Display Ranked Applicants
+
+    EMP->>SYS: Shortlist/Reject
+    SYS->>DB: Update Application Status
+```
 
 ---
 
