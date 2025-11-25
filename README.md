@@ -3,6 +3,7 @@
 [![Java](https://img.shields.io/badge/Java-17-orange.svg)]()
 [![MySQL](https://img.shields.io/badge/MySQL-8.0-blue.svg)]()
 [![Tomcat](https://img.shields.io/badge/Tomcat-10.x-lightgrey.svg)]()
+[![Bootstrap](https://img.shields.io.badge/Bootstrap-5.3.8.purple.svg)]()
 
 HiroAI is an intelligent recruitment platform that revolutionizes the hiring process through AI-powered resume analysis and smart candidate matching. The platform connects job seekers with employers while automating tedious recruitment tasks through advanced resume parsing and skill-matching algorithms.
 
@@ -251,6 +252,57 @@ erDiagram
     JOBS  ||--o{ APPLICATIONS : "receives (job_id)"
     USERS ||--o{ RESUME_ANALYSIS_LOGS : "has"
 ```
+
+## Use Case Diagram
+flowchart LR
+    %% Actors
+    JobSeeker[Job Seeker]
+    Employer[Employer]
+    Admin[Administrator]
+
+    %% Job Seeker Use Cases
+    JobSeeker -->|performs| Login[Login/Register]
+    JobSeeker -->|performs| UploadResume[Upload Resume]
+    JobSeeker -->|performs| BrowseJobs[Browse Jobs]
+    JobSeeker -->|performs| ApplyJob[Apply for Job]
+    JobSeeker -->|performs| TrackApp[Track Applications]
+    JobSeeker -->|performs| ChatAI[Chat with AI]
+
+    %% Employer Use Cases
+    Employer -->|performs| Login
+    Employer -->|performs| PostJob[Post Job Opening]
+    Employer -->|performs| ViewApplicants[View Applicants]
+    Employer -->|performs| Shortlist[Shortlist/Reject Candidates]
+    Employer -->|performs| DownloadResume[Download Resume]
+    Employer -->|performs| ChatAI
+
+    %% Admin Use Cases
+    Admin -->|performs| Login
+    Admin -->|performs| ManageUsers[Manage Users]
+    Admin -->|performs| BlockUser[Block/Unblock Accounts]
+    Admin -->|performs| ViewJobs[View All Jobs]
+
+    %% Styling with better contrast
+    style JobSeeker fill:#1976D2,stroke:#0D47A1,stroke-width:3px,color:#fff
+    style Employer fill:#F57C00,stroke:#E65100,stroke-width:3px,color:#fff
+    style Admin fill:#C62828,stroke:#8E0000,stroke-width:3px,color:#fff
+
+    style Login fill:#388E3C,stroke:#1B5E20,stroke-width:2px,color:#fff
+    style UploadResume fill:#0277BD,stroke:#01579B,stroke-width:2px,color:#fff
+    style BrowseJobs fill:#0277BD,stroke:#01579B,stroke-width:2px,color:#fff
+    style ApplyJob fill:#0277BD,stroke:#01579B,stroke-width:2px,color:#fff
+    style TrackApp fill:#0277BD,stroke:#01579B,stroke-width:2px,color:#fff
+    style ChatAI fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#fff
+
+    style PostJob fill:#E65100,stroke:#BF360C,stroke-width:2px,color:#fff
+    style ViewApplicants fill:#E65100,stroke:#BF360C,stroke-width:2px,color:#fff
+    style Shortlist fill:#E65100,stroke:#BF360C,stroke-width:2px,color:#fff
+    style DownloadResume fill:#E65100,stroke:#BF360C,stroke-width:2px,color:#fff
+
+    style ManageUsers fill:#B71C1C,stroke:#7F0000,stroke-width:2px,color:#fff
+    style BlockUser fill:#B71C1C,stroke:#7F0000,stroke-width:2px,color:#fff
+    style ViewJobs fill:#B71C1C,stroke:#7F0000,stroke-width:2px,color:#fff
+
 
 ---
 
