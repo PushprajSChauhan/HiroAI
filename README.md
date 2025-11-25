@@ -8,6 +8,12 @@ HiroAI is an intelligent recruitment platform that revolutionizes the hiring pro
 
 ---
 
+## 🎬 Demo Video
+
+> **Click [this link](https://drive.google.com/file/d/16VueDdjppmu-G_nBPm8ThKoevbNIwiCo/view?usp=drive_link) to watch the full demo video of HiroAI.**
+
+---
+
 ## 🚀 About
 
 HiroAI simplifies hiring by combining resume parsing, skill extraction, and intelligent matching to surface the best candidates for each role. The platform supports multi-role access (Users, Employers, Admin), automated resume analysis using the Affinda API, OTP-based email verification, session-based authentication, and a modern responsive UI.
@@ -397,14 +403,6 @@ hiroaiapp/
 └── README.md
 ```
 
----
-
-## 🎬 Demo Video
-
-> **Click [this link](https://drive.google.com/file/d/16VueDdjppmu-G_nBPm8ThKoevbNIwiCo/view?usp=drive_link) to watch the full demo video of HiroAI.**
-
----
-
 ## 🤝 Contributing
 
 Contributions are welcome!
@@ -454,6 +452,7 @@ Project Link: https://github.com/PushprajSChauhan/HiroAI
 - **Intelligent Interview Prep Module:** Mock face-to-face interviews with AI with real-time feedback.
 - **Job Recommendation Engine:** Users can be given notifications and recommendations about new job postings suitable for their skillsets.
 - **Responsive UI:** Enhanced mobile and desktop experience.
+- **Fine Tuning:** The Chat Assistant can be trained or directed to be focused for responding to technical domain related queries.
   
 ---
 
