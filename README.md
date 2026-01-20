@@ -11,7 +11,7 @@ HiroAI is an intelligent recruitment platform that revolutionizes the hiring pro
 
 ## 🎬 Demo Video
 
-> **Click [this link](https://drive.google.com/file/d/16VueDdjppmu-G_nBPm8ThKoevbNIwiCo/view?usp=drive_link) to watch the full demo video of HiroAI.**
+> **Click [this link](https://drive.google.com/file/d/1lxvRhKrh5DtHyWVvnw8_7Xykl3bQVrvt/view?usp=sharing) to watch the full demo video of HiroAI.**
 
 ---
 
